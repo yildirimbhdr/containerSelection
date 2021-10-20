@@ -11,6 +11,7 @@ class ContainerSelection extends StatefulWidget {
   final Curve? curve;
   final double? radius;
   final double? padding;
+  final Function(int?)? onChange;
   const ContainerSelection(
       {Key? key,
       required this.children,
@@ -22,7 +23,8 @@ class ContainerSelection extends StatefulWidget {
       this.duration,
       this.curve,
       this.radius,
-      this.padding})
+      this.padding,
+      this.onChange})
       : super(key: key);
 
   @override
@@ -85,6 +87,7 @@ class _ContainerSelectionState extends State<ContainerSelection> {
                     onTap: () {
                       index = currentIndex;
                       _changeSelection(currentIndex);
+                      if (widget.onChange != null) widget.onChange!(index);
                     },
                     child: Center(
                         child: AnimatedDefaultTextStyle(
